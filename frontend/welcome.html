@@ -3,24 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #4A00E0, #8E2DE2);
-            color: white;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout {
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            padding: 15px 20px;
+            height: 100vh; /* Full height */
+        }
+
+        .sidebar h2 {
+            color: #ffffff;
+        }
+
+        .sidebar a {
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .sidebar a:hover {
+            background-color: #495057; /* Darker shade on hover */
+        }
+
+        .content {
+            flex-grow: 1; /* Take remaining space */
+            padding: 20px;
+        }
+
         h1 {
-            text-align: center;
+            color: #333333;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to Phase 1 of Website created by Dikshit</h1>
+
+    <div class="header">
+        <h1>My Website</h1>
+        <div class="logout"><i class="fas fa-sign-out-alt"></i> Logout</div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+
+        <div class="content">
+            <h1>Welcome to My Website!</h1>
+            <p>This is the homepage content area where you can add your main content.</p>
+        </div>
+    </div>
+
 </body>
 </html>
