@@ -1,5 +1,6 @@
 // Define the AngularJS app
 var app = angular.module("loginApp", []);
+const errorMessageDiv = document.getElementById('error-message');
 
 // Define the login controller
 app.controller("loginController", function ($scope, $http) {
@@ -12,62 +13,54 @@ app.controller("loginController", function ($scope, $http) {
         if (!$scope.user.username || !$scope.user.password) {
             alert("Please enter both username and password.");
         } else {
-            // Proceed with the login request
-            $http.post('/login', $scope.user)
-                .then(function(response) {
+            // API endpoint for login (update with your backend URL)
+            var loginApiUrl = "http://localhost:3000/api/login";
+
+            // POST request to the login API
+            $http.post(loginApiUrl, $scope.user)
+                .then(function (response) {
+                    // Handle successful response
                     if (response.data.success) {
-                        alert("Login successful!");
-                    } else {
-                        alert(response.data.message);
+                        alert(response.data.message || "Login successful!");
+                        // Redirect to the welcome page
+                        window.location.href = "welcome.html";
                     }
                 })
-                .catch(function(error) {
+                .catch(function (error) {
+                    // Handle API errors
                     if (error.status === 401) {
-                        alert("Invalid username or password");
+                        // Update the UI with an error message
+                        const errorMessageDiv = document.getElementById("error-message");
+                        errorMessageDiv.style.display = "block";
+                        errorMessageDiv.textContent = "Invalid Username or Password.";
                     } else {
-                        alert("An error occurred. Please try again.");
+                        alert("An error occurred while processing your login request.");
+                        console.error(error);
                     }
                 });
         }
-
-        // API endpoint for login (update with your backend URL)
-        var loginApiUrl = "http://localhost:3000/api/login";
-
-        // POST request to the login API
-        $http.post(loginApiUrl, $scope.user)
-            .then(function (response) {
-                // Handle successful response
-                if (response.data.success) {
-                    alert(response.data.message || "Login successful!");
-                    // Redirect to the welcome page
-                    window.location.href = "welcome.html";
-                } else {
-                    // Handle login failure
-                    alert(response.data.message || "Invalid username or password.");
-                }
-            })
-            .catch(function (error) {
-                // Handle API errors
-                alert("An error occurred while processing your login request.");
-                console.error(error);
-            });
     };
 });
 
-document.getElementById("logout-btn").addEventListener("click", () => {
-    alert("You have logged out successfully!");
-    window.location.href = "index.html"; // Redirect to login page
-  });
-  
-  const popup = document.getElementById("video-popup");
-  const popupBtn = document.getElementById("popup-btn");
-  const closePopup = document.getElementById("close-popup");
-  
-  popupBtn.addEventListener("click", () => {
-    popup.classList.remove("hidden");
-  });
-  
-  closePopup.addEventListener("click", () => {
-    popup.classList.add("hidden");
-  });
-  
+async function logout() {
+    try {
+        const response = await fetch('http://localhost:3000/api/logout', { // Ensure URL matches backend
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            alert(result.message);
+            // Redirect to login page
+            window.location.href = "index.html";
+        } else {
+            const errorResult = await response.json();
+            alert(errorResult.message || 'Failed to logout. Please try again.');        }
+    } catch (error) {
+        console.error('Logout error:', error);
+        alert('An error occurred during logout.');
+    }
+}
