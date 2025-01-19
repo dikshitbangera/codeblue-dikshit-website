@@ -202,4 +202,11 @@ body, html {
     padding: 5px 10px;
     cursor: pointer;
   }
+
+  #error-message {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+}
   

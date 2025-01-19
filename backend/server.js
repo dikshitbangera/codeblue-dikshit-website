@@ -42,8 +42,21 @@ app.get('/', (req, res) => {
     res.send('Login API is running...');
 });
 
+app.post('/api/logout', (req, res) => {
+    try {
+        // Example: Clear cookies or handle token-based logout logic
+        res.clearCookie('connect.sid'); // Optional if you're using cookies
+        return res.status(200).json({ message: 'Logout Successful' });
+    } catch (error) {
+        console.error('Logout error:', error);
+        return res.status(500).json({ message: 'An error occurred during logout' });
+    }
+});
+
+
 // Start the server
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
