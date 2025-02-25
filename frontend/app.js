@@ -2,6 +2,7 @@
 const app = angular.module("loginApp", []);
 const errorMessageDiv = document.getElementById('error-message');
 
+//Adding another comment here
 // Define the login controller
 app.controller("loginController", function ($scope, $http) {
     // User object to bind form inputs

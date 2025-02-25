@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken'); // Make sure to install via npm install jso
 // Create an Express app
 const app = express();
 
+//Adding a comment here
 // Middleware
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(cors()); // Enable Cross-Origin Resource Sharing
