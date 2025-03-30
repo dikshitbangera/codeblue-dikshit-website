@@ -103,6 +103,8 @@ app.post('/api/logout', verifyToken, (req, res) => {
 
 });
 
+// Export the app without starting the server
+module.exports = app;
 
 // Start the server
 const PORT = 3000;
