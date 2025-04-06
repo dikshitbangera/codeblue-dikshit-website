@@ -45,8 +45,10 @@ app.post('/api/login', async (req, res) => {
 
     // Check if user exists in the database
     const user = users.find(user => user.username === username);
-    if(!user){
-        return res.status(401).json({succeess: false, message: 'Invalid username or password'});
+
+    // Validate user existence before comparing passwords
+    if (!user) {
+        return res.status(401).json({ success: false, message: 'Invalid username or password' });
     }
 
     // Compare the provided password with the stored hashed password
@@ -103,6 +105,8 @@ app.post('/api/logout', verifyToken, (req, res) => {
 
 });
 
+// Export the app without starting the server
+module.exports = app;
 
 // Start the server
 const PORT = 3000;
