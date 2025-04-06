@@ -20,7 +20,7 @@ describe('Auth API Tests', function () {
     it('should return 401 if credentials are incorrect', function (done) {
         request(app)
             .post('/api/login')
-            .send({ username: 'dikshit', password: 'wrong' })
+            .send({ username: 'wrong', password: 'wrong' })
             .expect(401)
             .end((err, res) => {
                 if (err) return done(err);
